@@ -1,3 +1,4 @@
+import json
 import time
 import interactive_pyaci
 
@@ -26,7 +27,6 @@ class Node:
         self.address_handle = address_handle
         self.compdata_received = compdata_received
         self.onoff = onoff
-
 
 class MeshManager(metaclass=Singleton):
     def __init__(self):
@@ -110,6 +110,7 @@ class MeshManager(metaclass=Singleton):
         if type:
             self.cc.model_publication_set(self.db.nodes[node].unicast_address + 1, mt.ModelId(0x1001), mt.Publish(self.db.nodes[0].unicast_address, index=0, ttl=1))
         time.sleep(1)
+
     # def add_subscription_adress(self):
     #     self.cc.model_subscription_add(element_address, address, model_id)
 
