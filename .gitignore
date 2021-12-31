@@ -6,4 +6,8 @@
 
 !*.py
 !*.md
-!*/
+!*/resources
+!*/mesh
+!*/database
+!*/aci
+!*/models
