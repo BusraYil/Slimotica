@@ -1,11 +1,14 @@
 # Ignore everything
 *
 
-# Except ...
+# Except file extensions...
 !.gitignore
 
+!*.txt
 !*.py
 !*.md
+
+# And folders...
 !*/resources
 !*/mesh
 !*/database
