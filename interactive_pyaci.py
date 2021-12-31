@@ -92,13 +92,14 @@ def configure_logger(device_name):
 
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setFormatter(stream_formatter)
-    stream_handler.setLevel(10)
+    stream_handler.setLevel(logging.INFO)
     logger.addHandler(stream_handler)
 
-    if not True:
+    if True:
         dt = DateTime.DateTime()
+        # logfile = "{}_{}-{}-{}-{}_output.log".format(
+        #     device_name, dt.yy(), dt.dayOfYear(), dt.hour(), dt.minute())
         logfile = "output.log"
-        
         logfile = os.path.join(LOG_DIR, logfile)
         fh = logging.FileHandler(logfile)
         fh.setLevel(logging.DEBUG)
@@ -106,7 +107,6 @@ def configure_logger(device_name):
         fh.setFormatter(file_formatter)
         logger.addHandler(fh)
     return logger
-
 
 class Interactive(object):
     DEFAULT_APP_KEY = bytearray([0xAA] * 16)
@@ -226,8 +226,7 @@ def start_ipython(options):
         ipython_config.InteractiveShellApp.db_log_output = False
     else:
         dt = DateTime.DateTime()
-        logfile = "{}/{}-{}-{}-{}_interactive_session.log".format(
-            LOG_DIR, dt.yy(), dt.dayOfYear(), dt.hour(), dt.minute())
+        logfile = "{}/interactive_session.log".format(LOG_DIR)
 
         ipython_config.TerminalInteractiveShell.logstart = True
         ipython_config.InteractiveShellApp.db_log_output = True

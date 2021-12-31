@@ -1,12 +1,11 @@
 from flask_restful import Resource
-import convert_log
+import mesh_manager
 
 
-class convertLog(Resource):
+class ConvertLog(Resource):
     def __init__(self):
-        self.convert_log = convert_log.Logdocument()
-       
+        self.mesh_manager = mesh_manager.MeshManager()
 
     def get(self):
-        self.convert_log.main()
+        self.mesh_manager.get_handle("devkey_handle")
         return 
