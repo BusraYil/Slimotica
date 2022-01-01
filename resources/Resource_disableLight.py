@@ -5,7 +5,7 @@ from flask_restful import Resource
 import mesh_manager
 
 #Resource in parameters van class zodat het via de API kan worden opgeroepen
-class Scan(Resource):
+class disable1(Resource):
 
 #definieer de class om bij de functie te komen. 
     def __init__(self):
@@ -13,5 +13,17 @@ class Scan(Resource):
 
 #roep functie aan met de nodige parameter(S).
     def get(self):
-        self.mesh_manager.disable_light()
+        self.mesh_manager.set_light(0, False)
+        return 
+
+#Resource in parameters van class zodat het via de API kan worden opgeroepen
+class disable2(Resource):
+
+#definieer de class om bij de functie te komen. 
+    def __init__(self):
+        self.mesh_manager = mesh_manager.MeshManager() 
+
+#roep functie aan met de nodige parameter(S).
+    def get(self):
+        self.mesh_manager.set_light(1, False)
         return 

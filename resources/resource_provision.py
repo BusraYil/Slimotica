@@ -9,11 +9,11 @@ class Provision(Resource):
 
     def get(self):
         self.mesh_manager.provision_device("light#1")
-        self.mesh_manager.configure_device(0, 0)
+        self.mesh_manager.configure_device(node = 0, type = 0)
 
         print("Plugin client")
         time.sleep(10)
 
-        self.mesh_manager.provision_device("switch#1")
-        self.mesh_manager.configure_device(1, 1)        
+        self.mesh_manager.provision_device("light#2")
+        self.mesh_manager.configure_device(node = 1, type = 0)        
         return 

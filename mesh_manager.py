@@ -33,19 +33,23 @@ class MeshManager(metaclass=Singleton):
         print('MeshManager has been made')
 
         DATABASE_PATH = 'database/example_database.json'
+        DEVICE = 'COM14'
         self.LOGFILE_PATH = 'log\output.log'
-        DEVICE = 'COM12'
+        self.SERVER_AMOUNT = 3
 
         self.nodes = []
+        self.present_nodes = 0
         self.gc = []
+
         self.db = MeshDB(DATABASE_PATH)
         self.device = Interactive(Uart(port=DEVICE, baudrate=115200, device_name=DEVICE))
         self.provisioner = Provisioner(self.device, self.db)
         self.cc = ConfigurationClient(self.db)
         self.device.model_add(self.cc)
 
-        self.gc.append( GenericOnOffClient() )
-        self.device.model_add(self.gc[0])
+        for x in range(self.SERVER_AMOUNT):
+            self.gc.append( GenericOnOffClient() )
+            self.device.model_add(self.gc[x])
 
 
     def provision_device(self, name: str):
@@ -97,15 +101,14 @@ class MeshManager(metaclass=Singleton):
             model = 0x1000
 
     # def bind_on_off_server(self, element_address: str, appkey_add: str,  model_id: str): #modelID moet uit die compositiondata eruit worden gehaad
-        self.cc.appkey_add(0) #is dit wel zo handig? we gebruiken toch 1 groep
+        self.cc.appkey_add(0)
         time.sleep(1)
-            # self.cc.model_app_bind(element_address= element_address, appkey_add =appkey_add, model_id=model_id)   
-        self.cc.model_app_bind(self.db.nodes[node].unicast_address + type, 0, mt.ModelId(model))    
+        self.cc.model_app_bind(self.db.nodes[node].unicast_address, 0, mt.ModelId(model))    
         time.sleep(1)
-    #     #index van nodes moet worden opgehoogd naarmate er meer nodes worden toegevoegd (provisionen van nieuw devicd)
 
-        # self.gc[0].publish_set(0, self.nodes[node].address_handle)
-        # time.sleep(1)
+        self.gc[node].publish_set(0, self.nodes[node].address_handle)
+
+        self.present_nodes += 1
     
         if type:
             self.cc.model_publication_set(self.db.nodes[node].unicast_address + 1, mt.ModelId(0x1001), mt.Publish(self.db.nodes[0].unicast_address, index=0, ttl=1))
@@ -115,13 +118,7 @@ class MeshManager(metaclass=Singleton):
     #     self.cc.model_subscription_add(element_address, address, model_id)
 
 
-    # def enable_light(self):
-        # while True:
-        #     self.gc[0].set(True)
-        #     time.sleep(1)
-        #     self.gc[0].set(False)
-        #     time.sleep(1)
-    #self.node1.set(True)
-    
-    # def disable_light(self):
-     #           self.gc[0].set(False)
+    def set_light(self, index : int, state : bool):
+        if index >= 0 and index < self.present_nodes:
+            self.gc[index].set(state)
+            time.sleep(1)
