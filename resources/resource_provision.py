@@ -1,19 +1,20 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 import mesh_manager
-import time
 
 class Provision(Resource):
     def __init__(self):
         self.mesh_manager = mesh_manager.MeshManager()
 
-
     def get(self):
-        self.mesh_manager.provision_device("light#1")
-        self.mesh_manager.configure_device(node = 0, type = 0)
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', type = str, default = '')
+        args = parser.parse_args()
+        name = args['name']
 
-        print("Plugin client")
-        time.sleep(10)
+        if (name == ''):
+            print("ERROR: Name is required")
+            return
 
-        self.mesh_manager.provision_device("light#2")
-        self.mesh_manager.configure_device(node = 1, type = 0)        
-        return 
+        self.mesh_manager.provision_device(name)
+        self.mesh_manager.configure_device()
+        return
