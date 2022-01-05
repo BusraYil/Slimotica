@@ -4,7 +4,7 @@
 - Error handling for message feedback (what is the status of the received feedback)     (Busra)
     -->bijv. provisionen completed. Merken dat iets is gelukt of niet.
 - JSON database automatic reset                                                         (Tim)         [X]
-- Dynamic configuration of nodes (with index number)                                    (Tim)   
+- Dynamic configuration of nodes (with index number)                                    (Tim)         [X]
 
 -----------------------------------**6 January**---------------------------------------------------------
 - Unprovisioning of nodes (database cascade)                                            (Busra/Tim)

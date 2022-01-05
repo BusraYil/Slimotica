@@ -1,0 +1,8 @@
+provision?name=Node1
+provision?name=Node2
+provision?name=Node3
+configure?index=0
+set?index=0&state=1
+set?index=0&state=0
+set?index=1&state=1
+set?index=1&state=0
