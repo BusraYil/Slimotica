@@ -8,6 +8,7 @@ from misc import restore_json, restore_log
 from resources.resource_provision import Provision
 from resources.resource_configureDevice import ConfigureDevice
 from resources.resource_setLight import SetLight
+from resources.resource_qtTest import qtTest
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,6 +16,7 @@ api = Api(app)
 api.add_resource(Provision, "/provision")
 api.add_resource(ConfigureDevice, "/configure")
 api.add_resource(SetLight, "/set")
+api.add_resource(qtTest, "/qttest")
 
 # Argument parser
 parser = argparse.ArgumentParser(description = 'Main app script')

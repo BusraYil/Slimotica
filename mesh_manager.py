@@ -161,6 +161,18 @@ class MeshManager(metaclass=Singleton):
             self.cc.appkey_add(0)
             time.sleep(1)
 
+            # Check neemt als argumenten: een functie, aantal pogingen voordat exception gegeven moet worden,
+            # delay tussen pogingen, de string die gevonden moet worden in het logbestand en de ceiling string
+
+            # Check( self.scan_start, 3, 5, "Received UUID", "PacketSend")
+
+            #Check(func, max_tries, try_delay, stringtofind)
+            # func()
+            # Hier check je voor de te vinden string
+            # ...
+            # ...
+            # 
+
             type = self.nodes[node].type
 
             if (type == 0):
@@ -196,8 +208,8 @@ class MeshManager(metaclass=Singleton):
                                                   mt.ModelId(0x1001), 
                                                   mt.Publish(self.db.nodes[index].unicast_address, index=0, ttl=1))
                     self.nodes[node].models_bound[count] = True
-                    count += 1                                                  
-                    time.sleep(1) 
+                    count += 1                               
+                    time.sleep(1)
         elif (type != 0):
             print("Invalid type")
             return

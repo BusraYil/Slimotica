@@ -20,5 +20,5 @@ def restore_json():
 
 def restore_log():
     print("clearing log file...")
-    with open('log\output.log', 'w'):
-        pass
+    with open('log\output.log', 'w') as file:
+        file.write("---CEILING---")

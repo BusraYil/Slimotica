@@ -8,7 +8,7 @@
 
 -----------------------------------**6 January**---------------------------------------------------------
 - Unprovisioning of nodes (database cascade)                                            (Busra/Tim)
-- Detection of node functionality (server/client)                                       (Tim/Busra)
+- Detection of node functionality (server/client)                                       (Tim/Busra)   [x]
 
 -----------------------------------**8 January**---------------------------------------------------------
 Qt:
