@@ -15,13 +15,20 @@ class qtTest(Resource):
         # name = args['string']
 
         self.mesh_manager.nodes.append( Node(index = random.randint(0, 100)) )
-        names = { 
-            "index": []
+        nodes = { 
+            "index": [],
+            "name": [],
+            "type": [],
+            "state": []
         }
 
-        print(len(self.mesh_manager.nodes))
+        # print(len(self.mesh_manager.nodes))
 
-        for x in self.mesh_manager.nodes:
-            names["index"].append(x.index)
+        # for x in self.mesh_manager.nodes:
+        nodes["index"].extend( ["0", "1", "2", "3", "4", "5"] )
+        nodes["name"].extend( ["Light 1", "Switch 1", "Light 2", "Light 3", "Switch 2", "Switch 3"] )
+        nodes["type"].extend( ["0", "1", "0", "0", "1", "1"] )
+        nodes["state"].extend( ["1", "0", "1", "1", "0", "0"] )
+        nodes["used"].extend( ["1", "1", "1", "1", "1", "1"])
 
-        return names
+        return nodes
